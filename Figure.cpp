@@ -73,8 +73,15 @@ double Dot::Length(const Dot &A) {
 //Методы класса Octagon
 
 double Octagon::Area() {
-    double res = 4*sin(0.785398)*pow(this->Center().Length(this->coordinates[0]), 2);
-    return res;
+    double res = 0;
+    for (size_t i = 0; i < 7; i++) {
+        res += (coordinates[i].x * coordinates[i+1].y) - (coordinates[i+1].x * coordinates[i].y);
+    }
+   /*for (size_t i = 0; i < 7; ++i) {
+        res += (coordinates[i].y + coordinates[i+1].y) * (coordinates[i+1].x - coordinates[i].x) / 2;
+    }*/
+   res = res + (coordinates[7].x * coordinates[0].y) - (coordinates[0].x * coordinates[7].y);
+    return std::abs(res)/ 2;
 }
 
 Dot Octagon::Center() {
