@@ -22,9 +22,9 @@ Dot operator""_dot(const char* str, size_t size);
 class Figure {
 public:
     virtual Dot Center() = 0;
-    virtual void PrintOut() = 0;
+    virtual void PrintOut(std::ostream& os) = 0;
     virtual double Area() = 0;
-    virtual ~Figure() {}
+    virtual ~Figure() = default;
 };
 
 class Octagon : public Figure {
@@ -32,10 +32,9 @@ private:
     Dot* coordinates;
 public:
     Octagon();
-    //explicit Octagon(Dot* coords);
     explicit Octagon(std::istream& is);
     Dot Center() override;
-    void PrintOut() override;
+    void PrintOut(std::ostream& os) override;
     double Area() override;
     ~Octagon() override;
 };
@@ -46,10 +45,9 @@ private:
     Dot *coordinates;
 public:
     Triangle();
-    //explicit Triangle(Dot *coords);
     explicit Triangle(std::istream& is);
     Dot Center() override;
-    void PrintOut() override;
+    void PrintOut(std::ostream& os) override;
     double Area() override;
     ~Triangle() override;
 };
@@ -59,11 +57,10 @@ private:
     Dot *coordinates;
 public:
     Square();
-    //explicit Square(Dot *coords);
     explicit Square(std::istream& is);
     Dot Center() override;
     double Area() override;
-    void PrintOut() override;
+    void PrintOut(std::ostream& os) override;
     ~Square() override;
 };
 

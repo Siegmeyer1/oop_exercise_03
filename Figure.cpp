@@ -1,7 +1,6 @@
 #include <iostream>
 #include <sstream>
 #include <cmath>
-#include <cassert>
 #include "Figure.h"
 
 //Методы класса Dot
@@ -75,7 +74,6 @@ double Dot::Length(const Dot &A) {
 
 double Octagon::Area() {
     double res = 4*sin(0.785398)*pow(this->Center().Length(this->coordinates[0]), 2);
-    std::cout << "Area\n";
     return res;
 }
 
@@ -88,14 +86,14 @@ Dot Octagon::Center() {
     return res;
 }
 
-void Octagon::PrintOut() {
+void Octagon::PrintOut(std::ostream& os) {
     for (int i = 0; i < 8; ++i) {
-        std::cout << this->coordinates[i];
+        os << this->coordinates[i];
         if (i != 7) {
-            std::cout << ", ";
+            os << ", ";
         }
     }
-    std::cout << '\n';
+    os << '\n';
 }
 
 Octagon::Octagon() {
@@ -104,10 +102,6 @@ Octagon::Octagon() {
         coordinates[i] = "0.0 0.0"_dot;
     }
 }
-
-/*Octagon::Octagon(Dot* coords) {
-    this->coordinates = coords;
-}*/
 
 Octagon::Octagon(std::istream &is) {
     coordinates = new Dot[8];
@@ -118,7 +112,6 @@ Octagon::Octagon(std::istream &is) {
 
 Octagon::~Octagon() {
     delete[] this->coordinates;
-    std::cout << "Destructed octagon\n";
 }
 
 //конец Octagon
@@ -131,10 +124,6 @@ Triangle::Triangle() {
         coordinates[i] = "0.0 0.0"_dot;
     }
 }
-
-/*Triangle::Triangle(Dot *coords) {
-    coordinates = coords;
-}*/
 
 Triangle::Triangle(std::istream &is) {
     coordinates = new Dot[3];
@@ -164,19 +153,18 @@ double Triangle::Area() {
     return res;
 }
 
-void Triangle::PrintOut() {
+void Triangle::PrintOut(std::ostream& os) {
     for (int i = 0; i < 3; ++i) {
-        std::cout << this->coordinates[i];
+        os << this->coordinates[i];
         if (i != 2) {
-            std::cout << ", ";
+            os << ", ";
         }
     }
-    std::cout << '\n';
+    os << '\n';
 }
 
 Triangle::~Triangle() {
     delete[] coordinates;
-    std::cout << "Destructed triangle\n";
 }
 
 //конец Triangle
@@ -189,10 +177,6 @@ Square::Square() {
         coordinates[i] = "0.0 0.0"_dot;
     }
 }
-
-/*Square::Square(Dot *coords) {
-    coordinates = coords;
-}*/
 
 Square::Square(std::istream &is) {
     coordinates = new Dot[2];
@@ -208,11 +192,11 @@ Dot Square::Center() {
 
 double Square::Area() {
     double res = this->coordinates[0].Length(this->coordinates[1]);
-    res = pow((res * sqrt(2) / 2), 2);
+    res = pow(res , 2) / 2;
     return  res;
 }
 
-void Square::PrintOut() {
+void Square::PrintOut(std::ostream& os) {
     Dot C = this->Center();
     double tmp;
     Dot res[2];
@@ -224,10 +208,10 @@ void Square::PrintOut() {
         res[i].x = -tmp;
         res[i] = res[i] + C;
     }
-    std::cout << res[0] << ", " << this->coordinates[0] << ", " << res[1] << ", " << this->coordinates[1] << '\n';
+    os << res[0] << ", " << this->coordinates[0] << ", "
+    << res[1] << ", " << this->coordinates[1] << '\n';
 }
 
 Square::~Square() {
     delete[] coordinates;
-    std::cout << "Destructed square\n";
 }

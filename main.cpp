@@ -42,7 +42,7 @@ int main() {
             case 4:
                 for (size_t i = 0; i < v.size(); ++i) {
                     std::cout << '\t' << i+1 << ':' << std::endl;
-                    v[i]->PrintOut();
+                    v[i]->PrintOut(std::cout);
                 }
                 break;
             case 5:
@@ -65,7 +65,7 @@ int main() {
                     tmp_area = v[i]->Area();
                     tmp_center = v[i]->Center();
                     std::cout << "Angle coordinates:\t";
-                    v[i]->PrintOut();
+                    v[i]->PrintOut(std::cout);
                     std::cout << "Center:\t\t\t" << tmp_center << '\n' << "Area:\t\t\t" << tmp_area << '\n';
                 }
                 break;
